@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="Diagonal cross and donut shape with padding, colored #192437">
+  <!-- Larger diagonal cross in top-left, same size as before but with more canvas space around -->
+  <g transform="translate(100,100)">
+    <line x1="0" y1="0" x2="360" y2="360" stroke="#192437" stroke-width="100" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="0" y1="360" x2="360" y2="0" stroke="#192437" stroke-width="100" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom-right donut ring, shifted accordingly to leave padding on right/bottom edges -->
+  <circle cx="900" cy="900" r="190" fill="none" stroke="#192437" stroke-width="100"/>
+</svg>
