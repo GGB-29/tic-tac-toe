@@ -26,9 +26,10 @@ body {
     align-items: center;
 
     margin-top: 20px;
+    
 }
 
-.title {
+.header-container > * {
     background-color: #0d131f;
     box-shadow: 0 0 6px #fb64b6;
     border-radius: 20px;
@@ -37,7 +38,17 @@ body {
     font-family: "Rubik";
     font-size: 3rem;
     color: #fb64b6;
-    
+}
+
+.player-info *{
+    font-family: "Rubik";
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.player-one-score, 
+.player-two-score {
+    margin-top: 5px;
 }
 
 .gameboard-container {

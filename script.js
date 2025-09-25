@@ -34,8 +34,9 @@ function createGameboard () {
 const gameObject = (function () {
     const gameboardObject = createGameboard();
 
-    const playerOne = createPlayer('test1');
-    const playerTwo = createPlayer('test2');
+    let playerOne;
+    let playerTwo;
+
     let firstPlayer = playerOne;
     let currentPlayer = firstPlayer;
     let turnNumber = 1; //odd turns -> cross, even -> circle
@@ -81,7 +82,7 @@ const gameObject = (function () {
         }
     };
 
-    const startGame = () => {
+    const addGridFunctionality = () => {
         const gridSquares = document.querySelectorAll('.grid-square');
         gridSquares.forEach(square => {
             square.addEventListener('click', () => {
@@ -95,7 +96,16 @@ const gameObject = (function () {
                 }
             })
         });
+    }
 
+    const startGame = () => {
+        addGridFunctionality();
+
+        let playerOneName = 'test';
+        let playerTwoName = 'test';
+        
+        playerOne = createPlayer(playerOneName);
+        playerTwo = createPlayer(playerTwoName);
         
     }
 
