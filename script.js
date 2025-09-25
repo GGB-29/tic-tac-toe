@@ -2,10 +2,9 @@
 function createPlayer (name) {
     let playerScore = 0;
     const playerName = name;
-    const playerSymbol = symbol;
     
-    const getScore = () => (score);
-    const setScore = () => score++;
+    const getScore = () => (playerScore);
+    const setScore = () => playerScore++;
     const getName = () => (playerName);
     
     return {getName, getScore, setScore};
@@ -19,14 +18,16 @@ function createGameboard () {
                       ['', '', ''], 
                       ['', '', '']
                     ];
-    const addCounter = (player, xpos, ypos) => {gameboard[ypos, xpos] = player;};
+    const addCounter = (player, xpos, ypos) => {gameboard[ypos][xpos] = player;};
     const getGameboard = () => (gameboard);
-    const reset = () => gameboard = [ 
-                                      ['', '', ''], 
-                                      ['', '', ''], 
-                                      ['', '', '']
-                                    ];
-    return {addCounter, getGameboard};
+    const reset = () => {
+        gameboard = [ 
+                      ['', '', ''], 
+                      ['', '', ''], 
+                      ['', '', '']
+                    ];
+    };
+    return {addCounter, getGameboard, reset};
 };
 
 //create game module
@@ -43,24 +44,31 @@ const gameObject = (function () {
     const isGameWon = () => (isRowWon() || isColumnWon() || isDiagonalWon());
 
     const isRowWon = () => {
+        const currentGameboard = gameboardObject.getGameboard();
         for (let y = 0; y < 3; y++) {
-            if (gameboardObject[y][0] === gameboardObject[y][1] && gameboardObject[y][1] === gameboardObject[y][2]) {
+            if (currentGameboard[y][0] === currentGameboard[y][1] && 
+                currentGameboard[y][1] === currentGameboard[y][2] && 
+                currentGameboard[y][0] !== '') {
                 return true;
             }
         }
         return false;
     };
     const isColumnWon = () => {
+        const currentGameboard = gameboardObject.getGameboard();
         for (let x = 0; x < 3; x++) {
-            if (gameboardObject[0][x] === gameboardObject[1][x] && gameboardObject[1][x] === gameboardObject[2][x]) {
+            if (currentGameboard[0][x] === currentGameboard[1][x] && 
+                currentGameboard[1][x] === currentGameboard[2][x] && 
+                currentGameboard[0][x] !== '') {
                 return true;
             }
         }
         return false;
     };
     const isDiagonalWon = () => {
-        return ((gameboardObject[0][0] === gameboardObject[1][1] && gameboardObject[1][1] === gameboardObject[2][2]) 
-            || (gameboardObject[0][2] === gameboardObject[1][1] && gameboardObject[1][1] === gameboardObject[2][0]));
+        const currentGameboard = gameboardObject.getGameboard();
+        return ((currentGameboard[0][0] === currentGameboard[1][1] && currentGameboard[1][1] === currentGameboard[2][2] && currentGameboard[1][1] !== '') 
+            || (currentGameboard[0][2] === currentGameboard[1][1] && currentGameboard[1][1] === currentGameboard[2][0]) && currentGameboard[1][1] !== '');
     };
 
     //called each time a box is clicked
@@ -73,7 +81,26 @@ const gameObject = (function () {
         }
     };
 
+    const startGame = () => {
+        const gridSquares = document.querySelectorAll('.grid-square');
+        gridSquares.forEach(square => {
+            square.addEventListener('click', () => {
+                if (square.innerHTML === '') {
+                    if (turnNumber % 2 === 0) {
+                        square.innerHTML = '<img src="assets/purple_o.svg">';
+                    } else {
+                        square.innerHTML = '<img src="assets/cyan_x.svg">';
+                    }
+                    playTurn(Number(square.dataset.x), Number(square.dataset.y));
+                }
+            })
+        });
+
+        
+    }
+
     const endGame = () => {
+        console.log('test');
         //winner is player of previous turn
         let winner = (currentPlayer === playerOne) ? playerTwo : playerOne;
         currentPlayer.setScore;
@@ -82,4 +109,8 @@ const gameObject = (function () {
         //change player who goes first
         firstPlayer = (firstPlayer === playerOne) ? playerTwo : playerOne;
     };
+
+    return {startGame};
 })();
+
+gameObject.startGame();
