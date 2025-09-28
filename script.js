@@ -6,8 +6,9 @@ function createPlayer (name) {
     const getScore = () => (playerScore);
     const setScore = () => playerScore++;
     const getName = () => (playerName);
+    const resetScore = () => {playerScore = 0;};
     
-    return {getName, getScore, setScore};
+    return {getName, getScore, setScore, resetScore};
 }
 
 
@@ -115,10 +116,22 @@ const gameObject = (function () {
             document.querySelector('#winner-box').classList.add('hidden');
             gameboardObject.reset();
             resetDOM();
+            updateScores();
 
             firstPlayer = (firstPlayer === playerOne) ? playerTwo : playerOne;
             currentPlayer = firstPlayer;
         });
+
+        const resetBtn = document.querySelector('.reset');
+        resetBtn.addEventListener('click', () => {
+            resetDOM();
+            gameboardObject.reset();
+            currentPlayer = playerOne;
+            firstPlayer = playerOne;
+            playerOne.resetScore();
+            playerTwo.resetScore(0);
+            updateScores();
+        })
         
     }
 
@@ -140,6 +153,14 @@ const gameObject = (function () {
         gridSquares.forEach(square => {
             square.innerHTML = '';
         });
+    }
+
+    const updateScores = () => {
+        const playerOneScore = document.querySelector('.player-one-score');
+        const playerTwoScore = document.querySelector('.player-two-score');
+
+        playerOneScore.textContent = 'Score: ' + playerOne.getScore();
+        playerTwoScore.textContent = 'score: ' + playerTwo.getScore();
     }
 
     return {startGame};

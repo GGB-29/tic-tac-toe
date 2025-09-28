@@ -12,8 +12,7 @@ html {
 
 body {
     display: grid;
-    min-height: 100vh;
-    grid-template-rows: 150px 1fr 0.5fr;
+    grid-template-rows: 150px 1fr 0.1fr;
     background-color: #101828;
     background-image: url("assets/tic-tac-toe.svg");
     background-repeat: repeat;
@@ -107,4 +106,29 @@ body {
 
 div.hidden#winner-box {
   display: none;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset {
+    all: unset;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #0d131f;
+    box-shadow: 0 0 6px #e23703;
+    border-radius: 10px;
+    padding: 10px;
+
+    font-family: "Rubik";
+    font-size: 1rem;
+    color: #ff5f03;
+    text-shadow: 0 0 3px red;
+}
+
+.reset:hover {
+    background-color: #101828;
 }
