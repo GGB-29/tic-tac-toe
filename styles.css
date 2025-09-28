@@ -81,3 +81,30 @@ body {
     box-shadow: 0 0 6px #FF4D9D;
     background-color: #2a2a3f;
 }
+
+#winner-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.winner-content {
+    font-family: "Rubik";
+    font-weight: 900;
+    font-size: 6rem;
+    color: #f55b03;
+    text-align: center;
+    text-shadow: 0 0 10px #ee0606;
+}
+
+div.hidden#winner-box {
+  display: none;
+}

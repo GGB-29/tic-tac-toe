@@ -36,9 +36,9 @@ const gameObject = (function () {
 
     let playerOne;
     let playerTwo;
+    let firstPlayer;
+    let currentPlayer;
 
-    let firstPlayer = playerOne;
-    let currentPlayer = firstPlayer;
     let turnNumber = 1; //odd turns -> cross, even -> circle
 
     //checks if there is a winner
@@ -69,7 +69,7 @@ const gameObject = (function () {
     const isDiagonalWon = () => {
         const currentGameboard = gameboardObject.getGameboard();
         return ((currentGameboard[0][0] === currentGameboard[1][1] && currentGameboard[1][1] === currentGameboard[2][2] && currentGameboard[1][1] !== '') 
-            || (currentGameboard[0][2] === currentGameboard[1][1] && currentGameboard[1][1] === currentGameboard[2][0]) && currentGameboard[1][1] !== '');
+            || (currentGameboard[0][2] === currentGameboard[1][1] && currentGameboard[1][1] === currentGameboard[2][0] && currentGameboard[1][1] !== ''));
     };
 
     //called each time a box is clicked
@@ -106,19 +106,41 @@ const gameObject = (function () {
         
         playerOne = createPlayer(playerOneName);
         playerTwo = createPlayer(playerTwoName);
+
+        firstPlayer = playerOne;
+        currentPlayer = firstPlayer;
+
+        const closeBtn = document.querySelector('#winner-box');
+        closeBtn.addEventListener('click', () => {
+            document.querySelector('#winner-box').classList.add('hidden');
+            gameboardObject.reset();
+            resetDOM();
+
+            firstPlayer = (firstPlayer === playerOne) ? playerTwo : playerOne;
+            currentPlayer = firstPlayer;
+        });
         
     }
 
     const endGame = () => {
-        console.log('test');
+
         //winner is player of previous turn
         let winner = (currentPlayer === playerOne) ? playerTwo : playerOne;
-        currentPlayer.setScore;
-        gameboardObject.reset();
+        winner.setScore();
         
-        //change player who goes first
-        firstPlayer = (firstPlayer === playerOne) ? playerTwo : playerOne;
+        const winnerBox = document.querySelector('#winner-box');
+        const winnerMessage = document.querySelector('#winner-message');
+        winnerMessage.textContent = `${winner.getName()} wins!`.toUpperCase();
+        winnerBox.classList.remove('hidden');
+
     };
+
+    const resetDOM = () => {
+        const gridSquares = document.querySelectorAll('.grid-square');
+        gridSquares.forEach(square => {
+            square.innerHTML = '';
+        });
+    }
 
     return {startGame};
 })();
