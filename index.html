@@ -10,12 +10,12 @@
 <body>
     <div class="header-container">
         <div class="player-info">
-            <div class="player-one-name">EXAMPLE NAME</div>
+            <div class="player-one-name-display"></div>
             <div class="player-one-score">Score : 0</div>
         </div>
         <h1 class="title">Tic Tac Toe</h1>
         <div class="player-info">
-            <div class="player-two-name">EXAMPLE NAME</div>
+            <div class="player-two-name-display"></div>
             <div class="player-two-score">Score : 0</div>
         </div>
     </div>
@@ -36,6 +36,17 @@
         <div class="winner-content">
             <div id="winner-message"></div>
         </div>
+    </div>
+    <div class="name-input-box">
+        <form class="player-details">
+            <label for="player-one-name">Player One Name: </label>
+            <input type="text" id="player-one-name" name="player-one-name">
+
+            <label for="player-two-name">Player Two Name: </label>
+            <input type="text" id="player-two-name" name="player-two-name">
+
+            <button id="submit-player-details">OK</button>
+        </form>
     </div>
     <div class="buttons-container">
         <button class="reset">Reset Game</button>

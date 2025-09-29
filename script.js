@@ -102,14 +102,24 @@ const gameObject = (function () {
     const startGame = () => {
         addGridFunctionality();
 
-        let playerOneName = 'test';
-        let playerTwoName = 'test';
-        
-        playerOne = createPlayer(playerOneName);
-        playerTwo = createPlayer(playerTwoName);
+        const playerDetailsSubmit = document.querySelector('#submit-player-details');
+        playerDetailsSubmit.addEventListener('click', (e) => {
+            
+            e.preventDefault();
+            
+            const playerDetailsBox = document.querySelector('.name-input-box');
+            
+            const playerOneName = document.querySelector('#player-one-name').value;
+            const playerTwoName = document.querySelector('#player-two-name').value;
 
-        firstPlayer = playerOne;
-        currentPlayer = firstPlayer;
+            playerOne = createPlayer(playerOneName);
+            playerTwo = createPlayer(playerTwoName);
+            firstPlayer = playerOne;
+            currentPlayer = firstPlayer;
+
+            updateNames(playerOneName, playerTwoName);
+            playerDetailsBox.classList.add('hidden');
+        })
 
         const closeBtn = document.querySelector('#winner-box');
         closeBtn.addEventListener('click', () => {
@@ -129,10 +139,18 @@ const gameObject = (function () {
             currentPlayer = playerOne;
             firstPlayer = playerOne;
             playerOne.resetScore();
-            playerTwo.resetScore(0);
+            playerTwo.resetScore();
             updateScores();
         })
         
+    }
+
+    const updateNames = (playerOneInputtedName, playerTwoInputtedName) => {
+        const playerOneName = document.querySelector('.player-one-name-display');
+        const playerTwoName = document.querySelector('.player-two-name-display');
+
+        playerOneName.textContent = playerOneInputtedName;
+        playerTwoName.textContent = playerTwoInputtedName;
     }
 
     const endGame = () => {
@@ -160,7 +178,7 @@ const gameObject = (function () {
         const playerTwoScore = document.querySelector('.player-two-score');
 
         playerOneScore.textContent = 'Score: ' + playerOne.getScore();
-        playerTwoScore.textContent = 'score: ' + playerTwo.getScore();
+        playerTwoScore.textContent = 'Score: ' + playerTwo.getScore();
     }
 
     return {startGame};

@@ -81,7 +81,8 @@ body {
     background-color: #2a2a3f;
 }
 
-#winner-box {
+#winner-box, 
+.name-input-box {
     position: fixed;
     top: 0;
     left: 0;
@@ -95,6 +96,10 @@ body {
     cursor: pointer;
 }
 
+.name-input-box {
+    cursor: auto;
+}
+
 .winner-content {
     font-family: "Rubik";
     font-weight: 900;
@@ -104,8 +109,13 @@ body {
     text-shadow: 0 0 10px #ee0606;
 }
 
-div.hidden#winner-box {
+div.hidden#winner-box, 
+div.hidden.name-input-box {
   display: none;
+}
+
+.hidden {
+    display: none;
 }
 
 .buttons-container {
@@ -114,9 +124,15 @@ div.hidden#winner-box {
     align-items: center;
 }
 
-.reset {
+.reset, 
+#submit-player-details {
     all: unset;
     cursor: pointer;
+}
+
+.reset, 
+.player-details, 
+#submit-player-details {
     margin-top: 20px;
     background-color: #0d131f;
     box-shadow: 0 0 6px #e23703;
@@ -129,6 +145,49 @@ div.hidden#winner-box {
     text-shadow: 0 0 3px red;
 }
 
-.reset:hover {
+.reset:hover, 
+#submit-player-details {
     background-color: #101828;
+}
+
+.player-details {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 280px;
+    width: 400px;
+
+    font-size: 1.8rem;
+    border-radius: 10px;
+}
+
+input {
+    font-size: 1.5rem;
+    border-radius: 15px;
+    padding: 5px;
+    border: none;
+    box-shadow: none;
+
+    background-color: #1A1A2E;
+
+    font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+input {
+    box-shadow: 0 0 6px #e23703;
+}
+
+.player-details > * {
+    margin-top: 20px;
+}
+
+#submit-player-details {
+    box-shadow: 0 0 6px #21f10e;
+    color: #195813;
+    text-shadow: 0 0 1px #21f10e;
 }
